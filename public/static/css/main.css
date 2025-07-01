@@ -211,3 +211,41 @@ input[type="number"] {
 .notification-container p {
   margin: 0;
 }
+
+.messages {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.messages li {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+/* Message tag-based styling */
+.messages li.success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.messages li.error {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+.messages li.warning {
+  background-color: #fff3cd;
+  color: #664d03;
+  border: 1px solid #ffecb5;
+}
+
+.messages li.info {
+  background-color: #cff4fc;
+  color: #055160;
+  border: 1px solid #b6effb;
+}
