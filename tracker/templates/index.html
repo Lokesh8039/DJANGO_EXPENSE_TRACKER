@@ -1,33 +1,28 @@
-<!--updated index.html file -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/media/css/main.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
+{% extends "base.html" %}
+{% block start%}
 
     <h1>Expense Tracker</h1>
+    <h3>User Name : {{ user.username }}</h3>
+   
+   <a href="{% url 'logout_view' %}"><button class="btn" style="background-color: red;">Logout</button></a>
+   
     <div class="container">
       <div class="container">
         <div class="header">
             <img src="https://i.ibb.co/jfScDTC/budget.png" alt="Expense Tracker" />
             <div class="balance-container">
                 <h2>Your Balance</h2>
-                <h2 id="balance" class="balance">${{current_balance.current_balance}}</h2>
+                <h2 id="balance" class="balance">₹{{current_balance.current_balance}}</h2>
             </div>
         </div>
         <div class="inc-exp-container">
             <div>
                 <h4>Income</h4>
-                <p id="money-plus" class="money plus">+${{income}}</p>
+                <p id="money-plus" class="money plus">+₹{{income}}</p>
             </div>
             <div>
                 <h4>Expenses</h4>
-                <p id="money-minus" class="money minus">${{expense}}</p>
+                <p id="money-minus" class="money minus">-₹{{expense}}</p>
             </div>
         </div>
         <h3>History</h3>
@@ -45,17 +40,17 @@
         </ul>
 
       <h3>Add new transaction</h3>
-      <!-- Expense form -->
+
       <form method="POST" id="form">
         {% csrf_token %}
         <div class="form-control">
             <label for="text">Description</label>
-            <input type="text" name="description" id="text" placeholder="Enter description..." />
+            <input type="text" name="description" required id="text" placeholder="Enter description..." />
         </div>
         <div class="form-control">
             <label for="amount">Amount <br />
                 <small>(-100 = expense, 100 = income)</small></label>
-            <input type="number" name="amount" id="amount" placeholder="Enter amount..." />
+            <input type="number" name="amount" required id="amount" placeholder="Enter amount..." />
         </div>
         <button class="btn" type="submit">Add transaction</button>
     </form>
@@ -65,23 +60,4 @@
       <p>Please add a description and amount</p>
     </div>
 
-{% if messages %}
-  <div>
-    {% for message in messages %}
-      <div style="padding: 10px; margin: 10px 0; border-radius: 5px; {% if message.tags == 'success' %}
-                    background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;
-                  {% elif message.tags == 'error' %}
-                    background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;
-                  {% elif message.tags == 'warning' %}
-                    background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba;
-                  {% else %}
-                    background-color: #cce5ff; color: #004085; border: 1px solid #b8daff;
-                  {% endif %}">
-        {{ message }}
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
-
-</body>
-</html>
+{% endblock %}
